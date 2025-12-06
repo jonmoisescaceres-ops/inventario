@@ -8,6 +8,33 @@ import { UserIcon, EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon, ShieldCh
 type Rol = 'admin' | 'operador'
 type Tab = 'login' | 'register'
 
+
+const InputField = ({ icon: Icon, type, placeholder, value, onChange, showPasswordToggle, onTogglePassword, required = true, valid = true, errorMsg }: any) => (
+  <div className="space-y-1">
+    <div className="relative">
+      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <Icon className="h-5 w-5 text-gray-400" />
+      </div>
+      <input
+        type={type}
+        className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 sm:text-sm transition duration-150 ease-in-out"
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        required={required}
+      />
+      {showPasswordToggle && (
+        <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+          <button type="button" onClick={onTogglePassword} className="text-gray-400 hover:text-gray-500 focus:outline-none">
+            {type === 'text' ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+          </button>
+        </div>
+      )}
+    </div>
+    {!valid && value && <p className="text-xs text-red-500 ml-1">{errorMsg}</p>}
+  </div>
+)
+
 export default function Auth() {
   const navigate = useNavigate()
   const loginStore = useAuthStore((s) => s.login)
@@ -71,31 +98,9 @@ export default function Auth() {
     }
   }
 
-  const InputField = ({ icon: Icon, type, placeholder, value, onChange, showPasswordToggle, onTogglePassword, required = true, valid = true, errorMsg }: any) => (
-    <div className="space-y-1">
-      <div className="relative">
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <Icon className="h-5 w-5 text-gray-400" />
-        </div>
-        <input
-          type={type}
-          className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-primary-500 focus:border-primary-500 sm:text-sm transition duration-150 ease-in-out"
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          required={required}
-        />
-        {showPasswordToggle && (
-          <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-            <button type="button" onClick={onTogglePassword} className="text-gray-400 hover:text-gray-500 focus:outline-none">
-              {type === 'text' ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
-            </button>
-          </div>
-        )}
-      </div>
-      {!valid && value && <p className="text-xs text-red-500 ml-1">{errorMsg}</p>}
-    </div>
-  )
+
+  // ... rest of component
+
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 font-sans">
