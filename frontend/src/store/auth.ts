@@ -4,7 +4,7 @@ type Usuario = { id: string; nombre: string; correo: string; rol: 'admin' | 'ope
 type AuthState = {
   token: string | null
   usuario: Usuario | null
-  login: (payload: { token: string; usuario: Usuario; remember?: boolean }) => void
+  login: (payload: { token: string; usuario: Usuario }) => void
   logout: () => void
 }
 
@@ -20,14 +20,12 @@ function getInitial() {
 
 export const useAuthStore = create<AuthState>((set) => ({
   ...getInitial(),
-  login: ({ token, usuario, remember }) => {
-    if (remember) {
-      try {
-        localStorage.setItem('token', token)
-        localStorage.setItem('usuario', JSON.stringify(usuario))
-      } catch (e) {
-        console.error('Persist error', e)
-      }
+  login: ({ token, usuario }) => {
+    try {
+      localStorage.setItem('token', token)
+      localStorage.setItem('usuario', JSON.stringify(usuario))
+    } catch (e) {
+      console.error('Persist error', e)
     }
     set({ token, usuario })
   },
