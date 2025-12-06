@@ -291,7 +291,7 @@ export default function Auth() {
 
         {/* Footer */}
         <p className="mt-6 text-center text-xs text-gray-500">
-          &copy; 2024 Inventario Pro. Todos los derechos reservados.
+          &copy; 2025 Inventario- Jonas. Todos los derechos reservados.
         </p>
       </div>
     </div>
