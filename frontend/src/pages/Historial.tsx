@@ -39,30 +39,32 @@ export default function Historial() {
         <button className="bg-primary-600 text-white rounded-lg" onClick={filtrar}>Filtrar</button>
       </Card>
       <Card>
-        <table className="min-w-full text-sm">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="text-left p-2">Insumo</th>
-              <th className="text-left p-2">Tipo</th>
-              <th className="text-left p-2">Cantidad</th>
-              <th className="text-left p-2">Usuario</th>
-              <th className="text-left p-2">Fecha</th>
-              <th className="text-left p-2">Comentario</th>
-            </tr>
-          </thead>
-          <tbody>
-            {moves.map((m) => (
-              <tr key={m._id} className="border-t">
-                <td className="p-2">{getNombreInsumo(m.insumo_id)}</td>
-                <td className="p-2">{m.tipo}</td>
-                <td className="p-2">{m.cantidad}</td>
-                <td className="p-2">{m.usuario}</td>
-                <td className="p-2">{new Date(m.fecha).toLocaleString()}</td>
-                <td className="p-2">{m.comentario}</td>
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-sm">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="text-left p-2">Insumo</th>
+                <th className="text-left p-2">Tipo</th>
+                <th className="text-left p-2">Cantidad</th>
+                <th className="text-left p-2">Usuario</th>
+                <th className="text-left p-2">Fecha</th>
+                <th className="text-left p-2">Comentario</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {moves.map((m) => (
+                <tr key={m._id} className="border-t">
+                  <td className="p-2 whitespace-nowrap">{getNombreInsumo(m.insumo_id)}</td>
+                  <td className="p-2">{m.tipo}</td>
+                  <td className="p-2">{m.cantidad}</td>
+                  <td className="p-2">{m.usuario}</td>
+                  <td className="p-2 whitespace-nowrap">{new Date(m.fecha).toLocaleString()}</td>
+                  <td className="p-2 min-w-[150px]">{m.comentario}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Card>
     </div>
   )
