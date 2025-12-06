@@ -12,11 +12,11 @@ export default function MiHistorial() {
   const [items, setItems] = useState<Item[]>([])
   useEffect(() => {
     api.get('/movements', { params: { tipo: 'salida' } }).then((r) => setMoves(r.data))
-    api.get('/items').then((r) => setItems(r.data))
+    api.get('/items/options').then((r) => setItems(r.data))
   }, [])
   const getNombreInsumo = (id: string) => {
     const item = items.find((i) => i._id === id)
-    console.log('Mi Historial - Buscando:', id, 'Items disponibles:', items.length, 'Encontrado:', item)
+
     return item ? item.nombre : id
   }
   return (
